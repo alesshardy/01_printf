@@ -6,7 +6,7 @@
 #    By: apintus <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 17:16:05 by apintus           #+#    #+#              #
-#    Updated: 2023/11/28 14:37:39 by apintus          ###   ########.fr        #
+#    Updated: 2023/12/11 15:12:12 by apintus          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,10 @@ OBJS =	$(SRCS:.c=.o)
 #######################################################
 ## ARGUMENTS
 
-CC = gcc
+CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -I. 
+AR = ar rcs
+CFLAGS = -Wall -Wextra -Werror 
 NAME = libftprintf.a
 
 ########################################################
@@ -33,8 +34,11 @@ NAME = libftprintf.a
 
 all:	$(NAME)
 
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+
 $(NAME): $(OBJS)
-		ar rcs $(NAME) $(OBJS)
+		$(AR) $(NAME) $(OBJS)
 
 clean:	
 		$(RM) $(OBJS)
